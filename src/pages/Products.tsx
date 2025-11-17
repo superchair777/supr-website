@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Filter, Grid, List, Star, Heart, ShoppingCart, Facebook, Instagram, X, Building, User, Mail, Phone, MapPin, FileText } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 import { fetchProducts, ProductRecord } from '../services/products';
 
 interface ProductsProps {
@@ -10,6 +11,7 @@ interface ProductsProps {
 
 const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
   const { t } = useTranslation();
+  const { addItem } = useCart();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceRange, setPriceRange] = useState([0, 2000]);
@@ -343,7 +345,15 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            // Handle add to cart logic here
+            addItem({
+              id: product.id,
+              name: product.name,
+              price: getCurrentPrice(product),
+              originalPrice: (product as any).originalPrice ?? (product as any).original_price ?? undefined,
+              image: product.image,
+              category: product.category,
+              inStock: product.inStock
+            }, 1)
           }}
           className={`w-full py-3 px-4 rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
             product.inStock
@@ -456,7 +466,15 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                // Handle add to cart logic here
+                addItem({
+                  id: product.id,
+                  name: product.name,
+                  price: getCurrentPrice(product),
+                  originalPrice: (product as any).originalPrice ?? (product as any).original_price ?? undefined,
+                  image: product.image,
+                  category: product.category,
+                  inStock: product.inStock
+                }, 1)
               }}
               className={`py-3 px-6 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
                 product.inStock

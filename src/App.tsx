@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import Customize from './pages/Customize';
 import ProductDetail from './pages/ProductDetail';
+import { CartProvider } from './context/CartContext';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <Router>
+      <CartProvider>
       <div className="min-h-screen transition-colors duration-300">
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         
@@ -39,6 +41,7 @@ const App = () => {
         
         <Footer isDarkMode={isDarkMode} />
       </div>
+      </CartProvider>
     </Router>
   );
 };

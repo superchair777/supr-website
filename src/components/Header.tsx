@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, ShoppingCart, Shield, Sun, Moon, Languages, ShoppingBag, Info, Newspaper, Phone } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleDarkMode }) => {
   const { t, i18n } = useTranslation();
+  const { items } = useCart();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -87,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleDarkMode }) => {
               <Link to="/cart">
                 <ShoppingCart className={`h-5 w-5 cursor-pointer transition-colors ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'}`} />
               </Link>
-              <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center text-[10px]">3</span>
+              <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center text-[10px]">{items.length}</span>
             </div>
           </div>
         </div>

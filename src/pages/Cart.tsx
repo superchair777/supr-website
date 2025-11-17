@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Minus, Plus, Trash2, ArrowLeft, ShoppingBag, CreditCard, Truck, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 interface CartProps {
   isDarkMode: boolean;
@@ -11,7 +12,7 @@ interface CartItem {
   id: number;
   name: string;
   price: number;
-  originalPrice?: number;
+  originalPrice?: number | null;
   quantity: number;
   image: string;
   category: string;
@@ -20,53 +21,13 @@ interface CartItem {
 
 const Cart: React.FC<CartProps> = ({ isDarkMode }) => {
   const { t } = useTranslation();
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: 'Executive Office Chair',
-      price: 899.99,
-      originalPrice: 1199.99,
-      quantity: 1,
-      image: 'https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400',
-      category: 'Executive',
-      inStock: true
-    },
-    {
-      id: 2,
-      name: 'Ergonomic Task Chair',
-      price: 649.99,
-      quantity: 2,
-      image: 'https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400',
-      category: 'Ergonomic',
-      inStock: true
-    },
-    {
-      id: 3,
-      name: 'Gaming Chair Pro',
-      price: 549.99,
-      originalPrice: 699.99,
-      quantity: 1,
-      image: 'https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400',
-      category: 'Gaming',
-      inStock: false
-    }
-  ]);
+  const { items, updateQuantity, removeItem } = useCart();
+  const cartItems = items as CartItem[];
 
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
 
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
+  
 
   const applyPromoCode = () => {
     if (promoCode.toLowerCase() === 'save10') {
