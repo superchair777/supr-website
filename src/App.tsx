@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SocialSidebar from './components/SocialSidebar';
-import WelcomeVideoModal from './components/WelcomeVideoModal';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import About from './pages/About';
@@ -22,8 +21,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
-        <WelcomeVideoModal isDarkMode={isDarkMode} />
+      <div className="min-h-screen transition-colors duration-300">
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         
         <SocialSidebar isDarkMode={isDarkMode} />

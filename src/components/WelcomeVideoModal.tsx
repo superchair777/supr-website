@@ -52,7 +52,7 @@ const WelcomeVideoModal: React.FC<WelcomeVideoModalProps> = ({ isDarkMode }) => 
         <div className={`flex items-center justify-between p-6 border-b transition-colors duration-300 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
           <div>
             <h2 className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-              Welcome to Super Chair! 🪑
+              Welcome to SUPR! 🪑
             </h2>
             <p className={`text-sm mt-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Discover the future of ergonomic seating
@@ -124,7 +124,7 @@ const WelcomeVideoModal: React.FC<WelcomeVideoModalProps> = ({ isDarkMode }) => 
                     <Play className="h-10 w-10 text-white ml-1" />
                   </div>
                   <p className="text-lg">Video Playing...</p>
-                  <p className="text-sm opacity-75 mt-2">Super Chair Product Showcase</p>
+                  <p className="text-sm opacity-75 mt-2">SUPR Product Showcase</p>
                 </div>
               </div>
               

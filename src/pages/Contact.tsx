@@ -8,6 +8,7 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ isDarkMode }) => {
   const { t } = useTranslation();
+  const showroomMapUrl = 'https://maps.app.goo.gl/HnxEb2Tgtt3sCuct6';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -310,9 +311,14 @@ const Contact: React.FC<ContactProps> = ({ isDarkMode }) => {
                 <p className={`text-lg font-medium transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                   {t('contact.map_coming_soon')}
                 </p>
-                <p className={`text-sm transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                  123 Ergonomic Ave, Design City, DC 12345
-                </p>
+                <a
+                  href={showroomMapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-sm transition-colors duration-300 underline ${isDarkMode ? 'text-gray-300 hover:text-gray-200' : 'text-gray-700 hover:text-gray-900'}`}
+                >
+                  View on Google Maps
+                </a>
               </div>
             </div>
           </div>

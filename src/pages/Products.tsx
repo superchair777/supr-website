@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Filter, Grid, List, Star, Heart, ShoppingCart, Facebook, Instagram, X, Building, User, Mail, Phone, MapPin, FileText } from 'lucide-react';
+import { fetchProducts, ProductRecord } from '../services/products';
 
 interface ProductsProps {
   isDarkMode: boolean;
@@ -14,6 +15,9 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
   const [priceRange, setPriceRange] = useState([0, 2000]);
   const [isWholesale, setIsWholesale] = useState(false);
   const [showWholesaleModal, setShowWholesaleModal] = useState(false);
+  const [remoteProducts, setRemoteProducts] = useState<ProductRecord[] | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [wholesaleForm, setWholesaleForm] = useState({
     companyName: '',
     contactName: '',
@@ -26,7 +30,7 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
     message: ''
   });
 
-  const products = [
+  const fallbackProducts = [
     {
       id: 1,
       name: 'Executive Office Chair',
@@ -165,24 +169,60 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
     }
   ];
 
+  const sourceProducts = remoteProducts ?? fallbackProducts;
   const categories = [
-    { id: 'all', name: t('products.all_products'), count: products.length },
-    { id: 'executive', name: t('home.executive_chair'), count: products.filter(p => p.category === 'executive').length },
-    { id: 'ergonomic', name: t('home.ergonomic_chairs'), count: products.filter(p => p.category === 'ergonomic').length },
-    { id: 'gaming', name: t('home.gaming_chairs'), count: products.filter(p => p.category === 'gaming').length },
-    { id: 'conference', name: t('home.conference_chair'), count: products.filter(p => p.category === 'conference').length }
+    { id: 'all', name: t('products.all_products'), count: sourceProducts.length },
+    { id: 'executive', name: t('home.executive_chair'), count: sourceProducts.filter(p => p.category === 'executive').length },
+    { id: 'ergonomic', name: t('home.ergonomic_chairs'), count: sourceProducts.filter(p => p.category === 'ergonomic').length },
+    { id: 'gaming', name: t('home.gaming_chairs'), count: sourceProducts.filter(p => p.category === 'gaming').length },
+    { id: 'conference', name: t('home.conference_chair'), count: sourceProducts.filter(p => p.category === 'conference').length }
   ];
 
-  const filteredProducts = products.filter(product => {
+  const filteredProducts = sourceProducts.filter(product => {
     const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
-    const currentPrice = isWholesale ? product.wholesalePrice : product.price;
+    const currentPrice = isWholesale ? (product.wholesalePrice ?? (product as any).wholesale_price ?? product.price) : product.price;
     const priceMatch = currentPrice >= priceRange[0] && currentPrice <= priceRange[1];
     return categoryMatch && priceMatch;
   });
 
-  const getCurrentPrice = (product: typeof products[0]) => {
-    return isWholesale ? product.wholesalePrice : product.price;
+  const getCurrentPrice = (product: typeof fallbackProducts[0] | ProductRecord) => {
+    const retail = (product as any).price ?? 0;
+    const wholesale = (product as any).wholesalePrice ?? (product as any).wholesale_price ?? null;
+    return isWholesale && wholesale ? wholesale : retail;
   };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchProducts()
+      .then(({ data, error }) => {
+        if (error) {
+          setLoadError('Failed to load products');
+          setRemoteProducts(null);
+        } else if (data && data.length) {
+          const mapped: any[] = data.map((p) => ({
+            id: p.id,
+            name: p.name,
+            category: p.category,
+            price: p.price,
+            wholesalePrice: p.wholesale_price ?? null,
+            moq: p.moq ?? null,
+            originalPrice: p.original_price ?? null,
+            rating: p.rating ?? 0,
+            reviews: p.reviews ?? 0,
+            image: p.image_url ?? '',
+            description: p.description ?? '',
+            features: p.features ?? [],
+            inStock: p.in_stock ?? true,
+            isNew: p.is_new ?? false,
+            isSale: p.is_sale ?? false,
+          }))
+          setRemoteProducts(mapped)
+        } else {
+          setRemoteProducts(null)
+        }
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
   const handleWholesaleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -212,7 +252,7 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
   };
 
   const ProductCard = ({ product }: { product: typeof products[0] }) => (
-    <Link to={`/product/${product.id}`} className={`group relative rounded-3xl overflow-hidden transition-all duration-300 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'} shadow-sm hover:shadow-lg block`}>
+    <Link to={`/product/${product.id}`} className={`group relative rounded-3xl overflow-hidden transition-all duration-300 ${isDarkMode ? 'glass-card-dark hover:bg-black/50' : 'glass-card hover:bg-white/50'} shadow-sm hover:shadow-lg block`}>
       {/* Product Badges */}
       <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
         {product.isNew && (
@@ -321,7 +361,7 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
   );
 
   const ProductListItem = ({ product }: { product: typeof products[0] }) => (
-    <div className={`flex gap-6 p-6 rounded-3xl transition-all duration-300 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'} shadow-sm hover:shadow-lg`}>
+    <div className={`flex gap-6 p-6 rounded-3xl transition-all duration-300 ${isDarkMode ? 'glass-card-dark hover:bg-black/50' : 'glass-card hover:bg-white/50'} shadow-sm hover:shadow-lg`}>
       <div className="relative">
         <Link to={`/product/${product.id}`}>
           <img
@@ -444,9 +484,17 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
             <h1 className={`text-5xl font-bold mb-4 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               {t('products.title')}
             </h1>
-            <p className={`text-lg max-w-2xl mx-auto transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {t('products.subtitle')}
-            </p>
+            <div className="max-w-3xl mx-auto">
+              <div className={`inline-flex items-center gap-3 px-4 py-3 rounded-2xl shadow-sm transition-colors duration-300 ${isDarkMode ? 'bg-gray-800 text-gray-100' : 'bg-gray-100 text-gray-800'}`}>
+                <span className={`inline-flex h-6 w-6 items-center justify-center rounded-lg ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-black text-white'}`}>🚚</span>
+                <span className="text-sm sm:text-base font-semibold tracking-tight leading-snug">
+                  <Trans i18nKey="products.subtitle">
+                    Orders of 5,000 THB or more qualify for free delivery within Bangkok and metropolitan areas.<br />
+                    (คำสั่งซื้อ 5,000 บาท ขึ้นไป ส่งฟรี เฉพาะกรุงเทพและปริมณฑล)
+                  </Trans>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -521,25 +569,25 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
             {/* Products Grid */}
             <div className="flex-1">
               {/* View Controls */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
                   <button
                     onClick={() => setIsWholesale(!isWholesale)}
-                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    className={`w-full sm:w-auto px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       isWholesale
                         ? isDarkMode
                           ? 'bg-blue-600 text-white hover:bg-blue-700'
                           : 'bg-blue-600 text-white hover:bg-blue-700'
                         : isDarkMode
-                        ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                     }`}
                   >
                     {isWholesale ? t('products.retail_pricing') : t('products.wholesale_pricing')}
                   </button>
                   <button
                     onClick={() => setShowWholesaleModal(true)}
-                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    className={`w-full sm:w-auto px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       isDarkMode
                         ? 'bg-green-600 text-white hover:bg-green-700'
                         : 'bg-green-600 text-white hover:bg-green-700'
@@ -561,8 +609,8 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
                           ? 'bg-gray-700 text-white'
                           : 'bg-gray-200 text-gray-900'
                         : isDarkMode
-                        ? 'text-gray-400 hover:bg-gray-700'
-                        : 'text-gray-600 hover:bg-gray-200'
+                          ? 'text-gray-400 hover:bg-gray-700'
+                          : 'text-gray-600 hover:bg-gray-200'
                     }`}
                   >
                     <Grid className="h-4 w-4" />
@@ -575,8 +623,8 @@ const Products: React.FC<ProductsProps> = ({ isDarkMode }) => {
                           ? 'bg-gray-700 text-white'
                           : 'bg-gray-200 text-gray-900'
                         : isDarkMode
-                        ? 'text-gray-400 hover:bg-gray-700'
-                        : 'text-gray-600 hover:bg-gray-200'
+                          ? 'text-gray-400 hover:bg-gray-700'
+                          : 'text-gray-600 hover:bg-gray-200'
                     }`}
                   >
                     <List className="h-4 w-4" />

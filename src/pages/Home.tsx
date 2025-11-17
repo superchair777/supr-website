@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Truck, CreditCard, RotateCcw } from 'lucide-react';
+import { ArrowRight, Truck, CreditCard, RotateCcw, ThumbsUp } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -10,6 +10,28 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const brandLogos = [
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/9.png?updatedAt=1763108968774',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/3.png?updatedAt=1763108968747',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/4.png?updatedAt=1763108968731',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/11.png?updatedAt=1763108968734',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/15.png?updatedAt=1763108968782',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/12.png?updatedAt=1763108968721',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/20.png?updatedAt=1763108968771',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/19.png?updatedAt=1763108968725',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/18.png?updatedAt=1763108968716',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/6.png?updatedAt=1763108968706',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/17.png?updatedAt=1763108968713',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/1.png?updatedAt=1763108968705',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/10.png?updatedAt=1763108968697',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/16.png?updatedAt=1763108968696',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/13.png?updatedAt=1763108968686',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/2.png?updatedAt=1763108968668',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/8.png?updatedAt=1763108968674',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/14.png?updatedAt=1763108968623',
+    'https://ik.imagekit.io/k89qbj4z2/Customers%20(%20SUPR)%20/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87-20251114T082753Z-1-001/%E0%B8%A5%E0%B8%B9%E0%B8%81%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87/7.png?updatedAt=1763108968479'
+  ];
+  const lineUrl = import.meta.env.VITE_LINE_URL ?? 'https://shop.line.me/@superchair';
 
   const handleShopChairsClick = () => {
     navigate('/products');
@@ -31,23 +53,15 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
           </p>
           <div className="relative overflow-hidden">
             <div className="flex animate-scroll whitespace-nowrap">
-              {/* First set of brands */}
               <div className="flex items-center justify-center shrink-0 space-x-16 px-8">
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Microsoft</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Google</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Apple</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Amazon</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Netflix</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Tesla</div>
+                {brandLogos.map((src, i) => (
+                  <img key={`logo-a-${i}`} src={src} alt="Client logo" className="h-12 sm:h-[67px] w-auto object-contain opacity-90" loading="lazy" />
+                ))}
               </div>
-              {/* Duplicate set for seamless loop */}
               <div className="flex items-center justify-center shrink-0 space-x-16 px-8">
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Microsoft</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Google</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Apple</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Amazon</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Netflix</div>
-                <div className={`text-2xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-gray-600' : 'text-gray-300'}`}>Tesla</div>
+                {brandLogos.map((src, i) => (
+                  <img key={`logo-b-${i}`} src={src} alt="Client logo" className="h-12 sm:h-[67px] w-auto object-contain opacity-90" loading="lazy" />
+                ))}
               </div>
             </div>
           </div>
@@ -110,23 +124,21 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
                   className="w-96 h-96 object-contain"
                 />
                 
-                <div className={`absolute top-4 right-8 rounded-2xl p-3 shadow-lg transition-colors duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
-                  <img
-                    src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=150"
-                    alt="Chair Detail"
-                    className="w-16 h-16 object-cover rounded-xl"
-                  />
+                <div className="absolute top-4 right-8">
+                  <div className={`w-16 h-16 flex items-center justify-center p-3 rounded-xl transition-all duration-300 hover:scale-110 hover:rotate-12 hover:shadow-lg cursor-pointer shadow-lg shadow-green-400/70 hover:shadow-green-400/90 hover:shadow-xl ${isDarkMode ? 'glass-button-dark' : 'glass-button'}`}>
+                    <ThumbsUp className={`w-8 h-8 ${isDarkMode ? 'text-white' : 'text-gray-700'}`} />
+                  </div>
                 </div>
-                <div className={`absolute -bottom-20 right-4 w-80 h-48 rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+                <div className={`absolute -bottom-20 right-4 w-80 h-48 rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
                   {/* Header with stats */}
                   <div className="p-4 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <div className="flex -space-x-2">
-                          <div className="w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full border-2 border-white shadow-sm"></div>
-                          <div className="w-6 h-6 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-2 border-white shadow-sm"></div>
-                          <div className="w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full border-2 border-white shadow-sm"></div>
-                          <div className="w-6 h-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-2 border-white shadow-sm flex items-center justify-center">
+                          <div className={`w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full border-2 shadow-sm ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}></div>
+                          <div className={`w-6 h-6 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-2 shadow-sm ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}></div>
+                          <div className={`w-6 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full border-2 shadow-sm ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}></div>
+                          <div className={`w-6 h-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-2 shadow-sm flex items-center justify-center ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                             <span className="text-white text-xs font-bold">+</span>
                           </div>
                         </div>
@@ -138,14 +150,14 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
                               </svg>
                             ))}
                           </div>
-                          <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>4.9/5</span>
+                          <span className="text-xs font-medium text-white">4.9/5</span>
                         </div>
                       </div>
                       <div className="text-right">
                         <div className={`text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>
                           30K+
                         </div>
-                        <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{t('home.happy_users')}</span>
+                        <span className={`text-xs font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>{t('home.happy_users')}</span>
                       </div>
                     </div>
                   </div>
@@ -256,65 +268,301 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
                 </div>
               </div>
             </div>
+            
+
           </div>
         </div>
       </section>
 
-      {/* Section 2: Categories */}
-      <section className={`py-20 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      {/* Apple-style Product Grid */}
+      <section className={`py-16 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="group cursor-pointer transform transition-all duration-300 hover:scale-105">
-              <div className={`rounded-3xl p-8 mb-6 aspect-square flex items-center justify-center transition-all duration-300 relative overflow-hidden ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'} group-hover:shadow-xl`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Executive Chairs"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
+          {/* Apple Events Style Card */}
+          <div className="mb-6">
+            <div className="group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.01] bg-black">
+              <div className="relative h-80 flex flex-col justify-center items-center p-8">
+                <div className="text-center">
+                  {/* Glowing Apple-style Logo */}
+                  <div className="mb-6">
+                    <div className="relative inline-block">
+                      <div className="w-20 h-20 mx-auto mb-4 relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-orange-400 rounded-full blur-lg opacity-80 animate-pulse"></div>
+                        <div className="relative w-full h-full bg-gradient-to-br from-blue-400 via-purple-500 to-orange-400 rounded-full flex items-center justify-center">
+                          <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 11h2v8H7v-8zm8 0h2v8h-2v-8zM5 9V7c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v2h-2V7H7v2H5zm14 4v6c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-6h2v6h10v-6h2z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <h2 className="text-4xl font-light text-white mb-2">SuperChair events</h2>
+                  <p className="text-lg text-gray-300 mb-6">Watch online on September 12 at 10 a.m. PT.</p>
+                  <div className="flex justify-center">
+                    <button className="bg-blue-600 text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                      Watch event
+                    </button>
+                  </div>
+                </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-3 transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.executive_chairs')}</h3>
-              <p className={`mb-4 text-sm leading-relaxed transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.executive_chairs_desc')}</p>
-              <button className={`flex items-center text-sm font-medium group-hover:translate-x-2 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                {t('home.explore_category')} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Large Card - MacBook Air Style */}
+            <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'} relative`}>
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+                style={{
+                  backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)',
+                }}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="relative h-80 flex flex-col justify-center items-center p-6 z-10">
+                <div className="text-center">
+                  <h2 className="text-3xl font-light text-white mb-2">H2 SERIES</h2>
+                  <div className="flex justify-center space-x-3 mb-4">
+                    <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                      Learn more
+                    </button>
+                    <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                      Buy
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="group cursor-pointer transform transition-all duration-300 hover:scale-105">
-              <div className={`rounded-3xl p-8 mb-6 aspect-square flex items-center justify-center transition-all duration-300 relative overflow-hidden ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'} group-hover:shadow-xl`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Ergonomic Chairs"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
+            {/* Large Card - iPad Pro Style */}
+            <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'} relative`}>
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+                style={{
+                  backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)',
+                }}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="relative h-80 flex flex-col justify-center items-center p-6 z-10">
+                <div className="text-center">
+                  <h2 className="text-3xl font-light text-white mb-2">W2 SERIES</h2>
+                  <div className="flex justify-center space-x-3 mb-4">
+                    <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                      Learn more
+                    </button>
+                    <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                      Buy
+                    </button>
+                  </div>
+                </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-3 transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.ergonomic_chairs')}</h3>
-              <p className={`mb-4 text-sm leading-relaxed transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.ergonomic_chairs_desc')}</p>
-              <button className={`flex items-center text-sm font-medium group-hover:translate-x-2 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                {t('home.explore_category')} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
             </div>
 
-            <div className="group cursor-pointer transform transition-all duration-300 hover:scale-105">
-              <div className={`rounded-3xl p-8 mb-6 aspect-square flex items-center justify-center transition-all duration-300 relative overflow-hidden ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'} group-hover:shadow-xl`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Gaming Chairs"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
+            {/* Medium Card - iPad Air Style */}
+            <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'} relative`}>
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+                style={{
+                  backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)',
+                }}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="relative h-80 flex flex-col justify-center items-center p-6 z-10">
+                <div className="text-center">
+                  <h2 className="text-3xl font-light text-white mb-2">H10 SERIES</h2>
+                  <div className="flex justify-center space-x-3 mb-4">
+                    <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                      Learn more
+                    </button>
+                    <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                      Buy
+                    </button>
+                  </div>
+                </div>
               </div>
-              <h3 className={`text-2xl font-bold mb-3 transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.gaming_chairs')}</h3>
-              <p className={`mb-4 text-sm leading-relaxed transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.gaming_chairs_desc')}</p>
-              <button className={`flex items-center text-sm font-medium group-hover:translate-x-2 transition-all duration-300 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                {t('home.explore_category')} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+            </div>
+
+            {/* Medium Card - Apple Watch Style */}
+            <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'} relative`}>
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+                style={{
+                  backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)',
+                }}
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="relative h-80 flex flex-col justify-center items-center p-6 z-10">
+                <div className="text-center">
+                  <h2 className="text-3xl font-light text-white mb-2">V2 SERIES</h2>
+                  <div className="flex justify-center space-x-3 mb-4">
+                    <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                      Learn more
+                    </button>
+                    <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                      Buy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Small Cards Row */}
+            <div className="md:col-span-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* AirPods Style */}
+                <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
+                  <div className="relative h-80">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)'
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40" />
+                    <div className="relative h-full flex flex-col justify-center items-center text-center p-6">
+                      <h2 className="text-3xl font-light text-white mb-2">NX SERIES</h2>
+                      <div className="flex justify-center space-x-3">
+                        <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                          Learn more
+                        </button>
+                        <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* MacBook Pro Style */}
+                <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
+                  <div className="relative h-80">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)'
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40" />
+                    <div className="relative h-full flex flex-col justify-center items-center text-center p-6">
+                      <h2 className="text-3xl font-light text-white mb-2">ERGONOMIC CHAIR</h2>
+                      <p className="text-base text-gray-200 mb-4">(PRICE 1,000-3,000 THB)</p>
+                      <div className="flex justify-center space-x-3">
+                        <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                          Learn more
+                        </button>
+                        <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Second Row of Small Cards - positioned after small cards */}
+            <div className="md:col-span-2 mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Studio Display Style */}
+                <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
+                  <div className="relative h-80">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)'
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40" />
+                    <div className="relative h-full flex flex-col justify-center items-center text-center p-6">
+                      <h2 className="text-3xl font-light text-white mb-2">EXECUTIVE CHAIR</h2>
+                      <p className="text-base text-gray-200 mb-4">(PRICE 3,001-6,000 THB)</p>
+                      <div className="flex justify-center space-x-3">
+                        <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                          Learn more
+                        </button>
+                        <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mac Studio Style */}
+                <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
+                  <div className="relative h-80">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        backgroundImage: 'url(https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800)'
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40" />
+                    <div className="relative h-full flex flex-col justify-center items-center text-center p-6">
+                      <h2 className="text-3xl font-light text-white mb-2">CEO CHAIR</h2>
+                      <p className="text-base text-gray-200 mb-4">(PRICE 6,001 THB or more)</p>
+                      <div className="flex justify-center space-x-3">
+                        <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                          Learn more
+                        </button>
+                        <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="md:col-span-2 mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Mac Studio Style */}
+                <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
+                  <div className="relative h-80">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-300"
+                      style={{ backgroundImage: "url('https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800')" }}
+                    ></div>
+                    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+                    <div className="relative h-full flex flex-col justify-center items-center text-center p-6">
+                      <h2 className="text-3xl font-light text-white mb-2">Auditrorium / Lecture / BENCH CHAIR</h2>
+                      <div className="flex justify-center space-x-3">
+                        <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                          Learn more
+                        </button>
+                        <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Studio Display Style */}
+                <div className={`group cursor-pointer rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${isDarkMode ? 'glass-card-dark' : 'glass-card'}`}>
+                  <div className="relative h-80">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-300"
+                      style={{ backgroundImage: "url('https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=800')" }}
+                    ></div>
+                    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+                    <div className="relative h-full flex flex-col justify-center items-center text-center p-6">
+                      <h2 className="text-3xl font-light text-white mb-2">OTHER</h2>
+                      <div className="flex justify-center space-x-3">
+                        <button className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                          Learn more
+                        </button>
+                        <button className="border border-white text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-gray-900 transition-colors">
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Featured Spatial Experience Section */}
-          <div className={`rounded-3xl overflow-hidden transition-colors duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+          <div className={`rounded-3xl overflow-hidden transition-colors duration-300 ${isDarkMode ? 'glass-card-dark bg-gray-800/60' : 'glass-card bg-white/80'}`}>
             <div className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[400px]">
               <div className="p-12 flex items-center justify-center">
                 <img
@@ -328,7 +576,9 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
                   {t('home.ultimate_comfort_title')}
                 </h2>
                 <p className={`mb-8 leading-relaxed transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  {t('home.ultimate_comfort_desc')}
+                  <Trans i18nKey="home.ultimate_comfort_desc">
+                    Enhance your workspace with chairs designed for comfort<br />balanced support and top performance in every task
+                  </Trans>
                 </p>
                 <button onClick={handleShopChairsClick} className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
                   {t('home.shop_chairs')}
@@ -339,221 +589,29 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
         </div>
       </section>
 
-      {/* Section 3: Best Sellers */}
-      <section className={`py-20 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      {/* Newsletter Section */}
+      <section className={`py-20 transition-colors duration-300 ${isDarkMode ? 'bg-gray-50' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className={`text-3xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.best_sellers')}</h2>
-            <button className={`flex items-center text-sm font-medium hover:translate-x-1 transition-transform ${isDarkMode ? 'text-white' : 'text-black'}`}>
-              {t('home.view_products')} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 hover:translate-x-1" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-8 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-xl ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Executive Office Chair"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Executive</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-sm mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 899.99 USD</p>
-              <h3 className={`text-lg font-medium mb-2 transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.executive_office_chair')}</h3>
-              <p className={`text-sm leading-relaxed transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.executive_office_chair_desc')}</p>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-8 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-xl ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Ergonomic Task Chair"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Ergonomic</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-sm mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 649.99 USD</p>
-              <h3 className={`text-lg font-medium mb-2 transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.ergonomic_task_chair')}</h3>
-              <p className={`text-sm leading-relaxed transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.ergonomic_task_chair_desc')}</p>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-8 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-xl ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Gaming Chair Pro"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Gaming</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-sm mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 549.99 USD</p>
-              <h3 className={`text-lg font-medium mb-2 transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.gaming_chair_pro')}</h3>
-              <p className={`text-sm leading-relaxed transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.gaming_chair_pro_desc')}</p>
-            </div>
-          </div>
-
-          {/* Superior Craftsmanship Section */}
-          <div className="text-center mb-16">
-            <h2 className={`text-3xl font-bold mb-4 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.craftsmanship_title')}</h2>
-            <p className={`leading-relaxed max-w-2xl mx-auto mb-8 transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {t('home.craftsmanship_desc')}
-            </p>
-            <button onClick={handleAboutClick} className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
-              {t('home.read_our_story')}
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className={`rounded-3xl p-8 aspect-video flex items-center justify-center transition-colors duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-              <img
-                src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt="Office Setup"
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            </div>
-            <div className={`rounded-3xl p-8 aspect-video flex items-center justify-center transition-colors duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-              <img
-                src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt="Chair Detail"
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Featured Products */}
-      <section className={`py-20 transition-colors duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className={`text-3xl font-bold transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.featured_products')}</h2>
-            <button className={`flex items-center text-sm font-medium hover:translate-x-1 transition-transform ${isDarkMode ? 'text-white' : 'text-black'}`}>
-              {t('home.view_chairs')} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 hover:translate-x-1" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-6 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-lg ${isDarkMode ? 'bg-gray-700 group-hover:bg-gray-600' : 'bg-gray-200 group-hover:bg-gray-300'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=300"
-                  alt="Executive Chair"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Executive</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-xs mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 899.99 USD</p>
-              <h3 className={`text-sm font-medium transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.executive_chair')}</h3>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-6 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-lg ${isDarkMode ? 'bg-gray-700 group-hover:bg-gray-600' : 'bg-gray-200 group-hover:bg-gray-300'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=300"
-                  alt="Task Chair"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Ergonomic</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-xs mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 649.99 USD</p>
-              <h3 className={`text-sm font-medium transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.task_chair')}</h3>
-            </div>
-
-            <div className="group cursor-pointer lg:col-start-3 lg:row-start-1 lg:row-span-2">
-              <div className={`rounded-3xl p-8 mb-4 aspect-square lg:aspect-[4/5] flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-xl ${isDarkMode ? 'bg-gray-700 group-hover:bg-gray-600' : 'bg-gray-200 group-hover:bg-gray-300'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Premium Gaming Chair"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Gaming</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-sm mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 1,249.99 USD</p>
-              <h3 className={`text-base font-medium transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.premium_gaming_chair')}</h3>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-6 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-lg ${isDarkMode ? 'bg-gray-700 group-hover:bg-gray-600' : 'bg-gray-200 group-hover:bg-gray-300'}`}>
-                <img
-                  src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=300"
-                  alt="Mesh Chair"
-                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`absolute bottom-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Mesh</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-xs mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 449.99 USD</p>
-              <h3 className={`text-sm font-medium transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.mesh_chair')}</h3>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className={`rounded-3xl p-6 mb-4 aspect-square flex items-center justify-center transition-all duration-300 relative transform group-hover:scale-105 group-hover:shadow-lg ${isDarkMode ? 'bg-gray-700 group-hover:bg-gray-600' : 'bg-gray-200 group-hover:bg-gray-300'}`}>
-                <Link to="/product/5" className="w-full h-full">
-                  <img
-                    src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=300"
-                    alt="Conference Chair"
-                    className="w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-110"
-                  />
-                </Link>
-                <span className={`absolute bottom-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>Conference</span>
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-2xl"></div>
-              </div>
-              <p className={`text-xs mb-1 transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>$ 349.99 USD</p>
-              <h3 className={`text-sm font-medium transition-all duration-300 group-hover:text-opacity-80 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.conference_chair')}</h3>
-            </div>
-          </div>
-
-          {/* Benefits Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center">
-              <div className={`rounded-2xl p-6 shadow-sm mb-4 w-16 h-16 mx-auto flex items-center justify-center transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
-                <Truck className={`h-6 w-6 ${isDarkMode ? 'text-white' : 'text-black'}`} />
-              </div>
-              <h3 className={`font-medium mb-1 text-sm transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.free_shipping')}</h3>
-              <p className={`text-xs transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.free_shipping_desc')}</p>
-            </div>
-            <div className="text-center">
-              <div className={`rounded-2xl p-6 shadow-sm mb-4 w-16 h-16 mx-auto flex items-center justify-center transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
-                <CreditCard className={`h-6 w-6 ${isDarkMode ? 'text-white' : 'text-black'}`} />
-              </div>
-              <h3 className={`font-medium mb-1 text-sm transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.secure_payments')}</h3>
-              <p className={`text-xs transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.secure_payments_desc')}</p>
-            </div>
-            <div className="text-center">
-              <div className={`rounded-2xl p-6 shadow-sm mb-4 w-16 h-16 mx-auto flex items-center justify-center transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
-                <RotateCcw className={`h-6 w-6 ${isDarkMode ? 'text-white' : 'text-black'}`} />
-              </div>
-              <h3 className={`font-medium mb-1 text-sm transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.free_return')}</h3>
-              <p className={`text-xs transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{t('home.free_return_desc')}</p>
-            </div>
-          </div>
-
-          {/* Newsletter Section */}
-          <div className={`rounded-3xl p-12 text-center shadow-sm transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}>
+          <div className={`rounded-3xl p-12 text-center shadow-sm transition-colors duration-300 ${isDarkMode ? 'glass-card-dark bg-gray-800/50' : 'glass-card bg-white/70'}`}>
             <h2 className={`text-3xl font-bold mb-4 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t('home.join_community')}</h2>
             <p className={`mb-8 max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {t('home.join_community_desc')}
+              <Trans i18nKey="home.join_community_desc">
+                Add LINE to receive exclusive benefits and premium offers<br />for our chairs and office furniture
+              </Trans>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-8">
-              <input
-                type="email"
-                placeholder={t('home.email_placeholder')}
-                className={`flex-1 px-4 py-3 border rounded-full focus:outline-none focus:ring-1 text-sm transition-colors ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:ring-gray-500 focus:border-gray-500' : 'bg-white border-gray-200 text-black placeholder-gray-500 focus:ring-gray-300 focus:border-gray-300'}`}
-              />
-              <button className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
-                {t('home.subscribe')}
-              </button>
+            <div className="flex justify-center max-w-md mx-auto mb-8">
+              <a
+                href={lineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center justify-center px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 ${isDarkMode ? 'bg-[#00b900] text-white hover:bg-[#00a700]' : 'bg-[#00b900] text-white hover:bg-[#00a700]'}`}
+              >
+                {t('home.add_line_button')}
+              </a>
             </div>
-            <div className={`flex items-center justify-between pt-8 border-t transition-colors duration-300 ${isDarkMode ? 'border-gray-600' : 'border-gray-100'}`}>
-              <span className={`text-3xl font-light transition-colors duration-300 ${isDarkMode ? 'text-gray-500' : 'text-gray-300'}`}>{t('home.ten_percent_off')}</span>
-              <span className={`text-3xl font-light transition-colors duration-300 ${isDarkMode ? 'text-gray-500' : 'text-gray-300'}`}>{t('home.offers')}</span>
+            <div className={`flex items-center justify-between pt-8 border-t transition-colors duration-300 ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+              <span className={`text-3xl font-light transition-colors duration-300 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>{t('home.ten_percent_off')}</span>
+              <span className={`text-3xl font-light transition-colors duration-300 ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>{t('home.offers')}</span>
             </div>
           </div>
         </div>
@@ -571,7 +629,7 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <article className="group cursor-pointer">
-              <div className={`rounded-3xl overflow-hidden mb-4 transition-colors aspect-video ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
+              <div className={`rounded-3xl overflow-hidden mb-4 transition-colors aspect-video ${isDarkMode ? 'glass-card-dark bg-gray-800/30 group-hover:bg-gray-700/40' : 'glass-card bg-gray-100/30 group-hover:bg-gray-200/40'}`}>
                 <img
                   src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
                   alt="Ergonomic Office Setup"
@@ -585,7 +643,7 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
             </article>
 
             <article className="group cursor-pointer">
-              <div className={`rounded-3xl overflow-hidden mb-4 transition-colors aspect-video ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
+              <div className={`rounded-3xl overflow-hidden mb-4 transition-colors aspect-video ${isDarkMode ? 'glass-card-dark bg-gray-800/30 group-hover:bg-gray-700/40' : 'glass-card bg-gray-100/30 group-hover:bg-gray-200/40'}`}>
                 <img
                   src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
                   alt="Chair Sale"
@@ -599,7 +657,7 @@ const Home: React.FC<HomeProps> = ({ isDarkMode }) => {
             </article>
 
             <article className="group cursor-pointer">
-              <div className={`rounded-3xl overflow-hidden mb-4 transition-colors aspect-video ${isDarkMode ? 'bg-gray-800 group-hover:bg-gray-700' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
+              <div className={`rounded-3xl overflow-hidden mb-4 transition-colors aspect-video ${isDarkMode ? 'glass-card-dark bg-gray-800/30 group-hover:bg-gray-700/40' : 'glass-card bg-gray-100/30 group-hover:bg-gray-200/40'}`}>
                 <img
                   src="https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=400"
                   alt="Perfect Chair"

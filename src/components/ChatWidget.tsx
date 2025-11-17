@@ -113,7 +113,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
               </div>
               <div>
                 <h3 className={`font-medium text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                  Super Chair Support
+                  SUPR Support
                 </h3>
                 <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   Online now
