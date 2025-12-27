@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, X, Send, MessageSquare, Mail } from 'lucide-react';
+import { MessageCircle, X, Send, MessageSquare, Mail, Building, Phone } from 'lucide-react';
 
 interface ChatWidgetProps {
   isDarkMode: boolean;
@@ -11,6 +11,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [feedbackForm, setFeedbackForm] = useState({
     email: '',
+    companyName: '',
+    phone: '',
     message: ''
   });
 
@@ -69,7 +71,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
     // Handle feedback submission here
     console.log('Feedback submitted:', feedbackForm);
     // Reset form and close modal
-    setFeedbackForm({ email: '', message: '' });
+    setFeedbackForm({ email: '', companyName: '', phone: '', message: '' });
     setShowFeedbackModal(false);
     // You could show a success message here
     alert('Thank you for your feedback! We\'ll get back to you soon.');
@@ -81,17 +83,17 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
 
   const closeFeedbackModal = () => {
     setShowFeedbackModal(false);
-    setFeedbackForm({ email: '', message: '' });
+    setFeedbackForm({ email: '', companyName: '', phone: '', message: '' });
   };
   return (
     <>
       {/* Chat Button */}
       <button
         onClick={toggleChat}
-        className={`p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 group ${
+        className={`p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
           isDarkMode 
-            ? 'bg-gray-800 hover:bg-green-600 text-gray-300 hover:text-white' 
-            : 'bg-white hover:bg-green-600 text-gray-600 hover:text-white'
+            ? 'glass-button-dark text-gray-200' 
+            : 'glass-button text-gray-700'
         }`}
         aria-label="Open chat support"
       >
@@ -108,8 +110,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
             isDarkMode ? 'border-gray-700 bg-gray-700' : 'border-gray-200 bg-gray-50'
           }`}>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                <MessageCircle className="h-4 w-4 text-white" />
+              <div className="w-8 h-8 bg-mustard-500 rounded-full flex items-center justify-center">
+                <MessageCircle className="h-4 w-4 text-black" />
               </div>
               <div>
                 <h3 className={`font-medium text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -155,8 +157,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
                   </button>
                   
                   {selectedFAQ === faq.id && (
-                    <div className={`mt-2 p-3 rounded-lg border-l-4 border-green-500 ${
-                      isDarkMode ? 'bg-gray-700' : 'bg-green-50'
+                    <div className={`mt-2 p-3 rounded-lg border-l-4 border-mustard-500 ${
+                      isDarkMode ? 'bg-gray-700' : 'bg-mustard-50'
                     }`}>
                       <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                         {faq.answer}
@@ -173,8 +175,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
                 onClick={openFeedbackModal}
                 className={`w-full flex items-center justify-center gap-2 p-3 rounded-lg text-sm font-medium transition-colors ${
                   isDarkMode 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    ? 'bg-mustard-500 hover:bg-mustard-600 text-black' 
+                    : 'bg-mustard-500 hover:bg-mustard-600 text-black'
                 }`}
               >
                 <MessageSquare className="h-4 w-4" />
@@ -191,11 +193,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
                 placeholder="Type your message..."
                 className={`flex-1 px-3 py-2 text-sm border rounded-full focus:outline-none focus:ring-1 ${
                   isDarkMode 
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-gray-500' 
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-gray-400'
+                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-mustard-500' 
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-mustard-400'
                 }`}
               />
-              <button className="p-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors">
+              <button className="p-2 bg-mustard-500 text-black rounded-full hover:bg-mustard-600 transition-colors">
                 <Send className="h-4 w-4" />
               </button>
             </div>
@@ -215,9 +217,9 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
             }`}>
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
-                  isDarkMode ? 'bg-blue-600' : 'bg-blue-600'
+                  isDarkMode ? 'bg-mustard-500' : 'bg-mustard-500'
                 }`}>
-                  <MessageSquare className="h-5 w-5 text-white" />
+                  <MessageSquare className="h-5 w-5 text-black" />
                 </div>
                 <div>
                   <h3 className={`text-lg font-bold transition-colors duration-300 ${
@@ -263,10 +265,60 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
                       required
                       className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition-colors ${
                         isDarkMode 
+                          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-mustard-500 focus:border-mustard-500' 
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-mustard-500 focus:border-mustard-500'
+                      }`}
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Company Name <span className="text-gray-400 text-xs font-normal">(Optional)</span>
+                  </label>
+                  <div className="relative">
+                    <Building className={`absolute left-3 top-3 h-4 w-4 ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`} />
+                    <input
+                      type="text"
+                      name="companyName"
+                      value={feedbackForm.companyName}
+                      onChange={handleFeedbackChange}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition-colors ${
+                        isDarkMode 
+                          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-mustard-500 focus:border-mustard-500' 
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-mustard-500 focus:border-mustard-500'
+                      }`}
+                      placeholder="Company Name"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Phone Number <span className="text-gray-400 text-xs font-normal">(Optional)</span>
+                  </label>
+                  <div className="relative">
+                    <Phone className={`absolute left-3 top-3 h-4 w-4 ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`} />
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={feedbackForm.phone}
+                      onChange={handleFeedbackChange}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 transition-colors ${
+                        isDarkMode 
                           ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500' 
                           : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500'
                       }`}
-                      placeholder="your@email.com"
+                      placeholder="Phone Number"
                     />
                   </div>
                 </div>
@@ -285,8 +337,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
                     rows={4}
                     className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 resize-none transition-colors ${
                       isDarkMode 
-                        ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500'
+                        ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-mustard-500 focus:border-mustard-500' 
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-mustard-500 focus:border-mustard-500'
                     }`}
                     placeholder="Please share your thoughts, suggestions, or any issues you've encountered..."
                   />
@@ -310,8 +362,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isDarkMode }) => {
                   type="submit"
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                     isDarkMode 
-                      ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                      ? 'bg-mustard-500 text-black hover:bg-mustard-600' 
+                      : 'bg-mustard-500 text-black hover:bg-mustard-600'
                   }`}
                 >
                   <Send className="h-4 w-4" />

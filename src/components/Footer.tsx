@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Shield, Facebook, Instagram } from 'lucide-react';
+import { Tooltip } from './ui/Tooltip';
 
 interface FooterProps {
   isDarkMode: boolean;
@@ -7,7 +9,13 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
   return (
-    <footer className={`py-16 transition-colors duration-300 ${isDarkMode ? 'bg-black text-white' : 'bg-black text-white'}`}>
+    <footer 
+      className="py-16 transition-colors duration-300 text-white bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: 'url("https://ik.imagekit.io/lfzeyp6hte/Gemini_Generated_Image_7u9uek7u9uek7u9u.png?updatedAt=1766655141537")',
+        backgroundColor: 'black'
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Logo and Newsletter */}
@@ -25,7 +33,7 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
                 placeholder="Your email address"
                 className={`flex-1 px-4 py-3 border rounded-full focus:outline-none focus:ring-1 text-white placeholder-gray-400 text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600 focus:ring-gray-500' : 'bg-gray-800 border-gray-700 focus:ring-gray-600'}`}
               />
-              <button className={`px-6 py-3 rounded-full text-sm font-medium transition-colors ${isDarkMode ? 'bg-gray-200 text-black hover:bg-gray-300' : 'bg-white text-black hover:bg-gray-200'}`}>
+              <button className="px-6 py-3 rounded-full text-sm font-medium transition-colors bg-mustard-500 text-black hover:bg-mustard-400 font-bold">
                 Subscribe
               </button>
             </div>
@@ -39,6 +47,7 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
               <li><a href="#" className="hover:text-white transition-colors">About</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+              <li><Link to="/admin/login" className="hover:text-white transition-colors">Admin Login</Link></li>
             </ul>
           </div>
 
@@ -59,17 +68,23 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
             © Copyright 2025 by SUPR. All rights reserved.
           </p>
           <div className="flex space-x-4">
-            <a href="https://www.facebook.com/superchairofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="h-4 w-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            </a>
-            <a href="https://www.tiktok.com/@superoffice_chair" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-              <svg className="h-4 w-4 text-gray-400 hover:text-white cursor-pointer transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-              </svg>
-            </a>
-            <a href="https://www.instagram.com/superchair_th/?fbclid=IwY2xjawNpbiNleHRuA2FlbQIxMABicmlkETBhRDVUTWZDSjZRTFNGYmRjAR5BXIb4XuimoUoeev5UR-UXTIV35upqrW0ysauKep32BnYF4j7lAXexPrHg7g_aem_zQyt-txWOtYurtt70_uVxg#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-4 w-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            </a>
+            <Tooltip content="Facebook" position="top">
+              <a href="https://www.facebook.com/superchairofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <Facebook className="h-4 w-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
+              </a>
+            </Tooltip>
+            <Tooltip content="TikTok" position="top">
+              <a href="https://www.tiktok.com/@superoffice_chair" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg className="h-4 w-4 text-gray-400 hover:text-white cursor-pointer transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                </svg>
+              </a>
+            </Tooltip>
+            <Tooltip content="Instagram" position="top">
+              <a href="https://www.instagram.com/superchair_th/?fbclid=IwY2xjawNpbiNleHRuA2FlbQIxMABicmlkETBhRDVUTWZDSjZRTFNGYmRjAR5BXIb4XuimoUoeev5UR-UXTIV35upqrW0ysauKep32BnYF4j7lAXexPrHg7g_aem_zQyt-txWOtYurtt70_uVxg#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Instagram className="h-4 w-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
+              </a>
+            </Tooltip>
           </div>
         </div>
       </div>

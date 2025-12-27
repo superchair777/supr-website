@@ -70,7 +70,7 @@ const WelcomeVideoModal: React.FC<WelcomeVideoModalProps> = ({ isDarkMode }) => 
         <div className="relative">
           {!isPlaying ? (
             // Video Thumbnail/Preview
-            <div className="relative aspect-video bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+            <div className="relative aspect-video bg-gradient-to-br from-gray-900 via-gray-800 to-black">
               <div className="absolute inset-0 bg-black bg-opacity-30"></div>
               
               {/* Background Pattern */}
@@ -120,7 +120,7 @@ const WelcomeVideoModal: React.FC<WelcomeVideoModalProps> = ({ isDarkMode }) => 
               {/* Video Placeholder - In a real implementation, you'd use an actual video element */}
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
                 <div className="text-center text-white">
-                  <div className="w-20 h-20 mx-auto mb-4 bg-green-500 rounded-full flex items-center justify-center animate-pulse">
+                  <div className="w-20 h-20 mx-auto mb-4 bg-mustard-500 rounded-full flex items-center justify-center animate-pulse">
                     <Play className="h-10 w-10 text-white ml-1" />
                   </div>
                   <p className="text-lg">Video Playing...</p>
@@ -161,13 +161,13 @@ const WelcomeVideoModal: React.FC<WelcomeVideoModalProps> = ({ isDarkMode }) => 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-mustard-500 rounded-full animate-pulse"></div>
                 <span className={`text-sm transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   15+ Years of Excellence
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-500"></div>
+                <div className="w-2 h-2 bg-black dark:bg-white rounded-full animate-pulse delay-500"></div>
                 <span className={`text-sm transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   50K+ Happy Customers
                 </span>

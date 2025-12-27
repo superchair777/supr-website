@@ -17,6 +17,7 @@ interface CartItem {
   image: string;
   category: string;
   inStock: boolean;
+  options?: Record<string, string> | null;
 }
 
 const Cart: React.FC<CartProps> = ({ isDarkMode }) => {
@@ -64,6 +65,18 @@ const Cart: React.FC<CartProps> = ({ isDarkMode }) => {
       description: t('cart.secure_payment_desc')
     }
   ];
+
+  const optionLabels: Record<string, string> = {
+    backrestColor: t('product.backrest_color'),
+    seatColor: t('product.seat_color'),
+    puColor: t('product.pu_color'),
+    material: t('product.material'),
+    armrests: 'Armrests',
+    base: 'Base',
+    wheels: 'Wheels',
+    lumbar: 'Lumbar',
+    headrest: 'Headrest'
+  };
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
@@ -143,13 +156,25 @@ const Cart: React.FC<CartProps> = ({ isDarkMode }) => {
                               <p className={`text-sm transition-colors duration-300 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                 {item.category}
                               </p>
+                              {item.options && (
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                  {Object.entries(item.options)
+                                    .filter(([key]) => key !== 'qty')
+                                    .map(([key, value]) => (
+                                      <span key={key} className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs ${isDarkMode ? 'bg-gray-700 text-gray-200' : 'bg-white text-gray-700 border border-gray-200'}`}>
+                                        <span className="font-medium">{optionLabels[key] ?? key}:</span>
+                                        <span>{value}</span>
+                                      </span>
+                                    ))}
+                                </div>
+                              )}
                               {!item.inStock && (
-                                <p className="text-sm text-red-500 mt-1">{t('cart.currently_out_of_stock')}</p>
+                                <p className="text-sm text-gray-500 mt-1">{t('cart.currently_out_of_stock')}</p>
                               )}
                             </div>
                             <button
                               onClick={() => removeItem(item.id)}
-                              className={`p-2 rounded-full transition-colors ${isDarkMode ? 'hover:bg-gray-700 text-gray-400 hover:text-red-400' : 'hover:bg-gray-200 text-gray-500 hover:text-red-500'}`}
+                              className={`p-2 rounded-full transition-colors ${isDarkMode ? 'hover:bg-gray-700 text-gray-400 hover:text-white' : 'hover:bg-gray-200 text-gray-500 hover:text-black'}`}
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
@@ -236,7 +261,7 @@ const Cart: React.FC<CartProps> = ({ isDarkMode }) => {
                       </button>
                     </div>
                     {appliedPromo && (
-                      <p className="text-sm text-green-500 mt-2">
+                      <p className="text-sm text-mustard-500 mt-2">
                         {t('cart.promo_applied', { code: appliedPromo })}
                       </p>
                     )}
@@ -254,10 +279,10 @@ const Cart: React.FC<CartProps> = ({ isDarkMode }) => {
                     </div>
                     
                     {promoDiscount > 0 && (
-                      <div className="flex justify-between text-green-500">
-                        <span>{t('cart.discount', { code: appliedPromo })}</span>
-                        <span>-${promoDiscount.toFixed(2)}</span>
-                      </div>
+                      <div className="flex justify-between text-mustard-600 dark:text-mustard-400">
+                    <span>{t('cart.discount', { code: appliedPromo })}</span>
+                    <span>-${promoDiscount.toFixed(2)}</span>
+                  </div>
                     )}
                     
                     <div className="flex justify-between">

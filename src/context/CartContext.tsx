@@ -9,6 +9,7 @@ export type CartItem = {
   image: string
   category: string
   inStock: boolean
+  options?: Record<string, string> | null
 }
 
 type CartContextValue = {
